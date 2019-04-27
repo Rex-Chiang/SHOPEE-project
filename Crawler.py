@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 import MySQLdb
 
 class Crawler:
@@ -14,11 +15,13 @@ class Crawler:
         self.url = "https://shopee.tw/api/v2/search_items/?by=ctime&limit=30&match_id="+shopid+"&newest=0&order=desc&page_type=shop"
         html = requests.get(self.url, headers=headers) # 對網站發出請求
         self.data = json.loads(html.text)
-        print(self.data)
         self.items = self.data["items"]
 
         host = "rds-mysql-rex.cscjvvfseets.us-east-1.rds.amazonaws.com"
-        passwd = str(input("PASSWORD : "))
+        #passwd = str(input("PASSWORD : "))
+        file = open('/home/rex/桌面/SHOPEE-project/password','r')
+        passwd = file.read().rstrip()
+        
         self.conn = MySQLdb.connect(host, port=3306, user='rex', passwd=passwd, db="Shopee")        
         self.cur = self.conn.cursor()
 
@@ -99,10 +102,10 @@ class Crawler:
         
         
 if __name__ == "__main__":
-    
-    #shopid = "16634688"
-    shopid = "829655"
-    crawler = Crawler(shopid)
-    crawler.run()
-    crawler.close()
+    shopid = ["829655", "16634688", "20364967"]
+    for shop in shopid:
+        crawler = Crawler(shop)
+        crawler.run()
+        crawler.close()
+        time.sleep(30)
 
