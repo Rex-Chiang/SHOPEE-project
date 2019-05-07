@@ -43,13 +43,14 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
-EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-MAILGUN_ACCESS_KEY = '1c5e1803d162765087bec2e4a98ef5fd-6140bac2-3352ac4f'
-MAILGUN_SERVER_NAME = 'sandbox6143b32f840444268c5bfb2439fe0344.mailgun.org'
+#EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+#MAILGUN_ACCESS_KEY = '1c5e1803d162765087bec2e4a98ef5fd-6140bac2-3352ac4f'
+#MAILGUN_SERVER_NAME = 'sandbox6143b32f840444268c5bfb2439fe0344.mailgun.org'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -91,6 +92,7 @@ WSGI_APPLICATION = 'ShopeeProject.wsgi.application'
 
 DATABASES = {
     'default': {
+        
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
@@ -134,5 +136,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'ShopeeSite/static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR)
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
+

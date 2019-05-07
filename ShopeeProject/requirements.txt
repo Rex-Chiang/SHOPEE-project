@@ -7,6 +7,7 @@ dj-database-url==0.5.0
 dj-static==0.0.6
 Django==2.2.1
 django-allauth==0.39.1
+django-mailgun==0.9.1
 gunicorn==19.9.0
 idna==2.8
 kiwisolver==1.1.0
@@ -14,7 +15,6 @@ matplotlib==3.0.3
 mysqlclient==1.4.2.post1
 numpy==1.16.3
 oauthlib==3.0.1
-pkg-resources==0.0.0
 psycopg2==2.8.2
 pyparsing==2.4.0
 python-dateutil==2.8.0
