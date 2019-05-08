@@ -21,6 +21,7 @@ from ShopeeSite import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path('statistic/', views.statistic),
     path('accounts/', include('allauth.urls')),
     path('login/', views.login),
     path('logout/', views.logout),
