@@ -2,27 +2,28 @@ import MySQLdb
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 """
-TO DO self.shopid find 3 products than others~~
+TO DO USE pro_id coneect with Get_data ~~
 """
 class Data:
     def __init__(self, shopid):
         self.shopid = shopid
         
-    def Get_data(self):
-        
         host = "rds-mysql-rex.cscjvvfseets.us-east-1.rds.amazonaws.com"
         file = open('/home/rex/桌面/SHOPEE-project/password','r')
         passwd = file.read().rstrip()
         
-        conn = MySQLdb.connect(host, port=3306, user='rex', passwd=passwd, db="Shopee")        
-        cur = conn.cursor()
+        self.conn = MySQLdb.connect(host, port=3306, user='rex', passwd=passwd, db="Shopee")        
+        
+        self.cur = self.conn.cursor()
+        
+    def Get_data(self):
 
         sql = "SELECT * FROM Shopee.products WHERE product_id IN ((%s));"
         val = (1966396779,)
-        cur.execute(sql,val)            
-        conn.commit()
-        prd1 = cur.fetchall()
-        conn.close()
+        self.cur.execute(sql,val)            
+        self.conn.commit()
+        prd1 = self.cur.fetchall()
+        #self.conn.close()
         
         view_count = [x[2] for x in prd1]
         liked_count = [x[3] for x in prd1]
@@ -69,10 +70,24 @@ class Data:
         plt.tight_layout()
         plt.show()
 
+    
+    def Get_products(self):
+        sql = "SELECT product_id FROM products WHERE shop_id = ((%s)) Limit 3;"
+        val = (self.shopid,)
+        self.cur.execute(sql,val)            
+        self.conn.commit()
+        pro_ids = self.cur.fetchall()
+        print(pro_ids)
+        
+        
+    def close(self):
+        self.conn.close()
+
 if __name__ == "__main__":
     shopid = "829655"
     data = Data(shopid)
-    data.Figure()
+    data.Get_products()
+    data.close()
     
     
     
