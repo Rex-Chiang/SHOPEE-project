@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +30,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+#'storages',
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,14 +49,12 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
-#EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-#MAILGUN_ACCESS_KEY = '1c5e1803d162765087bec2e4a98ef5fd-6140bac2-3352ac4f'
-#MAILGUN_SERVER_NAME = 'sandbox6143b32f840444268c5bfb2439fe0344.mailgun.org'
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-
+#'whitenoise.middleware.WhiteNoiseMiddleware',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -135,14 +134,50 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
+STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'ShopeeSite/static'),
-]
-STATIC_ROOT = os.path.join(BASE_DIR)
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR,"static")
+
+
+#DEFAULT_FILE_STORAGE = 'app.s3utils.MediaRootS3BotoStorage'
+#STATICFILES_STORAGE = 'app.s3utils.StaticRootS3BotoStorage'
+
+#AWS_STORAGE_BUCKET_NAME = 'shopeestaticfiles'
+#AWS_ACCESS_KEY_ID = 'AKIAULQG7QGU5LE36GPR'
+#AWS_SECRET_ACCESS_KEY = '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'
+
+#AWS_S3_SECURE_URLS = False  # use http instead of https
+#AWS_QUERYSTRING_AUTH = False  # we dont have any private files
+#S3_URL = 'http://s3-eu-west-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
+
+#MEDIA_ROOT = '/media/'
+#STATIC_ROOT = '/static/'
+#STATIC_URL = S3_URL + STATIC_ROOT
+#MEDIA_URL = S3_URL + MEDIA_ROOT
+#AWS_DEFAULT_ACL = None
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
 
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
-
 

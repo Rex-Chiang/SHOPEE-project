@@ -10,7 +10,7 @@
     <div class='col-md-12'>
 
             <div class='panel-heading' align=center>
-                <a href='/'><h3><span class='glyphicon glyphicon-send'></span> 開始統計 </h3></a>
+                <a href='/'><h3><span class='glyphicon glyphicon-cloud-download'></span> Analyze Statistically </h3></a>
                 {% if user.is_authenticated %}
                     {% if user.socialaccount_set.all.0.extra_data.name %}
                         <img src='{{user.socialaccount_set.all.0.get_avatar_url}}' width='100'><br/><br/>
@@ -19,21 +19,56 @@
                         <a href='/'> Welcome: {{ user.username }}</a>
                     {% endif %}
                 {% else %}
-                    <a href='/accounts/login/'><p>歡迎使用Facebook註冊/登入你的帳號</p></a>
+                    <a href='/accounts/login/'><p>Welcome to use Facebook & Google to sign up/login your account</p></a>
                 {% endif %}
             </div>
 
     </div>
 </nav>
 
-<div class='row'>
 {% load account %}
 
 {% if user.is_authenticated %}
-<a href='#' class='list-group-item'></a>
+
+<div class='container-fluid' align=left>
+    <div class='row'>
+    {% if ShopInfo %}
+    {% for shop in ShopInfo %}
+        <div class='col-sm-12 col-md-6'>
+            <div class='panel {% cycle "panel-primary" "panel-info" "panel-warning" "panel-success" %}'>
+                <div class='panel-heading'>
+                    <table width='100%'>
+                        <tr>
+                            <td>
+                                Shop Id :【{{ shop.shopid }}】
+                            </td>
+                            <td align=right>
+                                <i><small>{{ shop.pub_time }}</small></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='panel-body'>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="https://s3.amazonaws.com/shopeestaticfiles/static/Images/{{shop.product1id}}{{".jpg"}}" title="Product Image"" width=200 align="middle">
+                    <hr>
+                    <i>{{"Views & Liked Curve: "}}</i><br/>
+                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Counts/{{shop.shopid}}{{".png"}}" title="Views & Liked Curve" width=500><br/>
+                    <i>{{"Solds Curve: "}}</i><br/>
+                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Solds/{{shop.shopid}}{{".png"}}" title="Comments curve" width=500><br/>
+                    <i>{{"Stars Curve: "}}</i><br/>
+                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Stars/{{shop.shopid}}{{".png"}}" title="Stars Curve" width=500>
+                </div>
+             </div>
+         </div>
+       {% endfor %}
+    {% else %}
+    <a href='/statistic/' class='list-group-item' title='尚無統計資料'></a>
+    {% endif %}
+    </div>
+</div>
 {% else %}
-<a href='#' class='list-group-item' title='需登入'></a>
+<a href='/accounts/login/' class='list-group-item' title='需登入'></a>
 {% endif %}
- 
+
 </div>
 {% endblock %}

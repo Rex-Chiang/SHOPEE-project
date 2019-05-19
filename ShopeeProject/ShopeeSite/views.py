@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.sessions.models import Session
 from django.contrib import auth, messages
 from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse
 from .forms import LoginForm
-import datetime
+from ShopeeSite import models
+from .Data import Data
 
 def login(request):
     if request.method == 'POST':
@@ -39,36 +36,54 @@ def logout(request):
     return redirect('/')
 
 def index(request):
-
+    ShopInfo = models.ShopInfo.objects.all()
+    
     return render(request, 'index.html', locals())
 
 def statistic(request):
     try:
-        account = request.POST['account']
+        shop_id = request.POST['ShopID']
+        num = request.POST['NumofProducts']
     except:
-        account = None
-        message = '如需查詢，請輸入欲查詢蝦皮店家ID'
+        shop_id = None
+        num = None
+        message = 'Please enter the Shopee shop ID and sequence of the products if you want to analyze.'
     
-    if account != None:
-        url = "https://www.instagram.com/"+account+"/"
-        crawler1 = Crawler1(url)
-        crawler2 = Crawler2(url)
-
-        followers, following, article = crawler2.RE(crawler2.page.find_all("script")[4].text)
-
-        account = account.replace(".","_")
-
-        if int(article) <= 12:
-            Most_Liked_Posts, Most_Commented_Posts, Least_Liked_Posts, Least_Commented_Posts = crawler1.Run(account)
+    if shop_id != None and num != None:
+        data = Data(shop_id, num)
+        products_ids = data.Run()
+        data.close()
         
-        else:
-            Most_Liked_Posts, Most_Commented_Posts, Least_Liked_Posts, Least_Commented_Posts = crawler2.Run(account)
+        product1_id = str(products_ids[0])
+        product2_id = str(products_ids[1])
+        product3_id = str(products_ids[2])
         
-        
-        post = models.Article.objects.create(account=account, followers=followers, 
-                                             following=following, articles=article, 
-                                             Most_Liked_Posts=Most_Liked_Posts, Most_Commented_Posts=Most_Commented_Posts,
-                                             Least_Liked_Posts=Least_Liked_Posts, Least_Commented_Posts=Least_Commented_Posts)
+        post = models.ShopInfo.objects.create(shopid = shop_id,
+                                              product1id = product1_id,
+                                              product2id = product2_id, 
+                                              product3id = product3_id)
         post.save()
-        message = '統計成功 !! 請至主畫面觀看結果'
+        
+        message = 'Successful statistics !! Please back to homepage to watch the result.'
+        
     return render(request, 'statistic.html', locals())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

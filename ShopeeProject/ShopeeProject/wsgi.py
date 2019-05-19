@@ -17,3 +17,5 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ShopeeProject.settings')
 application = Cling(get_wsgi_application())
 
 
+
+

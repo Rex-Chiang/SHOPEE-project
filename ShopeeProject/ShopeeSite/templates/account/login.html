@@ -16,7 +16,7 @@
                 {% get_providers as socialaccount_providers %}
 
                 {% if socialaccount_providers %}
-                <p>{% blocktrans with site.name as site_name %}請登入你的 Facebook 帳戶  或是   <a href="{{ signup_url }}"> 註冊 </a>{{ site_name }} 的帳戶並於以下登入:{% endblocktrans %}</p>
+                <p>{% blocktrans with site.name as site_name %}Please login your Facebook/Google account or <a href="{{ signup_url }}"> sign up </a>{{ site_name }} the account and login below:{% endblocktrans %}</p>
 
                 <div class="socialaccount_ballot">
 
