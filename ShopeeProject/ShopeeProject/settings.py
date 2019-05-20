@@ -143,24 +143,6 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR,"static")
 
 
-#DEFAULT_FILE_STORAGE = 'app.s3utils.MediaRootS3BotoStorage'
-#STATICFILES_STORAGE = 'app.s3utils.StaticRootS3BotoStorage'
-
-#AWS_STORAGE_BUCKET_NAME = 'shopeestaticfiles'
-#AWS_ACCESS_KEY_ID = 'AKIAULQG7QGU5LE36GPR'
-#AWS_SECRET_ACCESS_KEY = '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'
-
-#AWS_S3_SECURE_URLS = False  # use http instead of https
-#AWS_QUERYSTRING_AUTH = False  # we dont have any private files
-#S3_URL = 'http://s3-eu-west-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
-
-#MEDIA_ROOT = '/media/'
-#STATIC_ROOT = '/static/'
-#STATIC_URL = S3_URL + STATIC_ROOT
-#MEDIA_URL = S3_URL + MEDIA_ROOT
-#AWS_DEFAULT_ACL = None
-
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
