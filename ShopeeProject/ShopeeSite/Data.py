@@ -74,7 +74,7 @@ class Data:
         
         view_count, liked_count, month_solds, historical_solds, rating_star, Date = self.Get_data(product_id)
         
-        figures = Figure(self.shopid)
+        figures = Figure(product_id)
         figures.Plot(view_count, liked_count, month_solds, historical_solds, rating_star, Date)
         
         self.Product_image(product_id)

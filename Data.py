@@ -73,7 +73,7 @@ class Data:
 
 if __name__ == "__main__":
     shopid = "829655"
-    num = 1
+    num = 2
     data = Data(shopid, num)
     data.Run()
     data.close()

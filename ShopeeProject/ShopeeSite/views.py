@@ -54,14 +54,10 @@ def statistic(request):
         products_ids = data.Run()
         data.close()
         
-        product1_id = str(products_ids[0])
-        product2_id = str(products_ids[1])
-        product3_id = str(products_ids[2])
+        product_id = str(products_ids[int(num)-1])
         
         post = models.ShopInfo.objects.create(shopid = shop_id,
-                                              product1id = product1_id,
-                                              product2id = product2_id, 
-                                              product3id = product3_id)
+                                              product_id = product_id)
         post.save()
         
         message = 'Successful statistics !! Please back to homepage to watch the result.'

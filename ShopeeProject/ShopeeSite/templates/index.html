@@ -49,25 +49,25 @@
                     </table>
                 </div>
                 <div class='panel-body'>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="https://s3.amazonaws.com/shopeestaticfiles/static/Images/{{shop.product1id}}{{".jpg"}}" title="Product Image"" width=200 align="middle">
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="https://s3.amazonaws.com/shopeestaticfiles/static/Images/{{shop.product_id}}{{".jpg"}}" title="Product Image"" width=200 align="middle">
                     <hr>
                     <i>{{"Views & Liked Curve: "}}</i><br/>
-                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Counts/{{shop.shopid}}{{".png"}}" title="Views & Liked Curve" width=500><br/>
+                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Counts/{{shop.product_id}}{{".png"}}" title="Views & Liked Curve" width=500><br/>
                     <i>{{"Solds Curve: "}}</i><br/>
-                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Solds/{{shop.shopid}}{{".png"}}" title="Comments curve" width=500><br/>
+                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Solds/{{shop.product_id}}{{".png"}}" title="Comments curve" width=500><br/>
                     <i>{{"Stars Curve: "}}</i><br/>
-                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Stars/{{shop.shopid}}{{".png"}}" title="Stars Curve" width=500>
+                    <img src="https://s3.amazonaws.com/shopeestaticfiles/static/Stars/{{shop.product_id}}{{".png"}}" title="Stars Curve" width=500>
                 </div>
              </div>
          </div>
        {% endfor %}
     {% else %}
-    <a href='/statistic/' class='list-group-item' title='尚無統計資料'></a>
+    <a href='/statistic/' class='list-group-item' title='There are no statistical data yet'> There are no statistical data yet </a>
     {% endif %}
     </div>
 </div>
 {% else %}
-<a href='/accounts/login/' class='list-group-item' title='需登入'></a>
+<a href='/accounts/login/' class='list-group-item' title='Please Login'> Please login </a>
 {% endif %}
 
 </div>

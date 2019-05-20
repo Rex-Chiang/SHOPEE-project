@@ -4,8 +4,8 @@ import io
 plt.style.use('ggplot')
 
 class Figure:
-    def __init__(self, shopid):
-        self.shopid = shopid
+    def __init__(self, product_id):
+        self.product_id = product_id
         
         file = open('/app/ShopeeSite/password','r')
         pass_file = file.readlines()
@@ -39,7 +39,7 @@ class Figure:
         plt.savefig(img_data)
         img_data.seek(0)
         img = img_data.read()
-        file_name = 'static/Counts/'+self.shopid+'.png'
+        file_name = 'static/Counts/'+str(self.product_id)+'.png'
         self.s3.Object(self.bucket, file_name).put(Body=img)
 
         #plt.show()
@@ -66,7 +66,7 @@ class Figure:
         plt.savefig(img_data)
         img_data.seek(0)
         img = img_data.read()
-        file_name = 'static/Solds/'+self.shopid+'.png'
+        file_name = 'static/Solds/'+str(self.product_id)+'.png'
         self.s3.Object(self.bucket, file_name).put(Body=img)
         
         #plt.show()
@@ -85,7 +85,7 @@ class Figure:
         plt.savefig(img_data)
         img_data.seek(0)
         img = img_data.read()
-        file_name = 'static/Stars/'+self.shopid+'.png'
+        file_name = 'static/Stars/'+str(self.product_id)+'.png'
         self.s3.Object(self.bucket, file_name).put(Body=img)
         
         #plt.show()
