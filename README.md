@@ -16,7 +16,7 @@
 
 由於此網站佈署於 Heroku 雲端平台，因此選用 Amazon Simple Storage Service 當作及時存取資料的網路伺服器，
 
-使用者送出資料後，網站後端便連線至 AWS RDS 並將資訊統計成圖表儲存於 AWS S3 ，再由 AWS S3 中擷取並顯示於網站中。
+使用者送出資料後，網站後端便連線至 AWS RDS 並將資訊統計成圖表儲存於 AWS S3 ，再自 AWS S3 擷取並顯示於網站中。
 
 **相關技術及工具:**
  * Python
