@@ -5,6 +5,7 @@ from .forms import LoginForm
 from ShopeeSite import models
 from .Data import Data
 
+# 登入程序
 def login(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
@@ -21,8 +22,6 @@ def login(request):
                     messages.add_message(request, messages.WARNING, "The user is not found")
             else:
                 messages.add_message(request, messages.WARNING, "Login Failed")
-            #except:
-                #messages.add_message(request, messages.WARNING, "The user is not found")
         else:
             messages.add_message(request, messages.INFO, "Please check the fields")
     else:
@@ -30,16 +29,19 @@ def login(request):
 
     return render(request, 'login.html', locals())
 
+# 登出程序
 def logout(request):
     auth.logout(request)
     messages.add_message(request, messages.INFO, "Successfully Logout")
     return redirect('/')
 
+# 主頁可以擷取Django資料庫的資料並顯示
 def index(request):
     ShopInfo = models.ShopInfo.objects.all()
     
     return render(request, 'index.html', locals())
 
+# 統計頁面負責呼叫Data.py及Figure.py擷取商品資訊
 def statistic(request):
     try:
         shop_id = request.POST['ShopID']
@@ -50,12 +52,13 @@ def statistic(request):
         message = 'Please enter the Shopee shop ID and sequence of the products if you want to analyze.'
     
     if shop_id != None and num != None:
+        # 呼叫完整商品統計流程
         data = Data(shop_id, num)
         products_ids = data.Run()
         data.close()
         
         product_id = str(products_ids[int(num)-1])
-        
+        # 將擷取的賣場ID、商品ID存於Django資料庫
         post = models.ShopInfo.objects.create(shopid = shop_id,
                                               product_id = product_id)
         post.save()

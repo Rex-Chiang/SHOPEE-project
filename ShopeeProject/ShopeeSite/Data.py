@@ -8,6 +8,7 @@ import io
 plt.style.use('ggplot')
 
 class Data:
+    # 以MySQL登入AWS RDS以及登入AWS S3
     def __init__(self, shopid, num):
         self.shopid = shopid
         self.num = num
@@ -26,7 +27,8 @@ class Data:
         
         self.bucket = 'shopeestaticfiles'
         self.s3 = boto3.resource('s3', aws_access_key_id=aws_key, aws_secret_access_key=aws_secret)
-        
+    
+    # 從AWS RDS擷取商品資訊  
     def Get_data(self, product_id):
 
         sql = "SELECT * FROM Shopee.products WHERE product_id IN ((%s));"
@@ -34,7 +36,7 @@ class Data:
         self.cur.execute(sql,val)            
         self.conn.commit()
         prd = self.cur.fetchall()
-        
+        # 包括瀏覽次數、喜好次數、月銷售量、歷史銷售量、客戶評分、紀錄日期
         view_count = [x[2] for x in prd]
         liked_count = [x[3] for x in prd]
         month_solds = [x[4] for x in prd]
@@ -44,6 +46,7 @@ class Data:
         
         return view_count, liked_count, month_solds, historical_solds, rating_star, Date
     
+    # 從AWS RDS擷取商品ID
     def Get_products(self):
         sql = "SELECT product_id FROM products WHERE shop_id = ((%s)) Limit 3;"
         val = (self.shopid,)
@@ -53,6 +56,7 @@ class Data:
         
         return pro_ids
     
+    # 從AWS RDS擷取商品圖片
     def Product_image(self, product_id):
         
         sql = "SELECT img FROM images WHERE product_id = ((%s));"
@@ -67,6 +71,7 @@ class Data:
         file_name = 'static/Images/'+str(product_id)+'.jpg'
         self.s3.Object(self.bucket, file_name).put(Body=img_data)
     
+    # 統計商品資訊流程
     def Run(self):
         products_ids =  list(map(lambda x: x[0], self.Get_products()))
         
@@ -80,7 +85,8 @@ class Data:
         self.Product_image(product_id)
         
         return products_ids
-        
+    
+    # 關閉MySQL連線
     def close(self):
         self.conn.close()
 

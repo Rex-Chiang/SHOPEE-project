@@ -1,6 +1,7 @@
 import MySQLdb
 
 class AWS:
+    # 以MySQL登入AWS RDS並創建資料表 shops、products、Images
     def __init__(self):
         host = "rds-mysql-rex.cscjvvfseets.us-east-1.rds.amazonaws.com"
         passwd = str(input("PASSWORD : "))
