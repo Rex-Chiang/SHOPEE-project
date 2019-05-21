@@ -1,6 +1,7 @@
 # SHOPEE-project
 
 **簡介:**
+
 使用者註冊此網站或是以 Facebook 或 Google 登入，
 
 若使用 Facebook 或 Google 登入則取得使用者姓名及大頭貼顯示於首頁，
