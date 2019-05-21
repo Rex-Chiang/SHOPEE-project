@@ -21,6 +21,7 @@
 **相關技術及工具:**
  * Python
  * Django 
+ * Web crawler
  * AWS RDS
  * AWS S3
  * MySQL
