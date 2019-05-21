@@ -14,7 +14,7 @@
 
 待使用者日後登入此網站便可以觀看從註冊當日至目前所統計的商品資訊，商品資訊將會由曲線圖展現於網站，
 
-由於此網站佈署於 Heroku 雲端平台，因此選用 Amazon Simple Storage Service 當作及時存取資料的位置，
+由於此網站佈署於 Heroku 雲端平台，因此選用 Amazon Simple Storage Service 當作及時存取資料的網路伺服器，
 
 透過輸入 Shopee賣場ID 及商品序號，後端便連線至 AWS RDS 並將資訊統計成圖表儲存於 AWS S3 ，再由 AWS S3 中擷取並顯示於網站中。
 
@@ -30,4 +30,5 @@
  * Bootstrap
 
 **成果:**
+
 ![Result](https://github.com/Rex-Chiang/SHOPEE-project/blob/master/ShopeeProject/Result/Result.gif)
