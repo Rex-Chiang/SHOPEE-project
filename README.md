@@ -22,6 +22,7 @@
  * Python
  * Django 
  * Web crawler
+ * Linux crontab
  * AWS RDS
  * AWS S3
  * MySQL
