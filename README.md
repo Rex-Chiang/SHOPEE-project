@@ -34,7 +34,9 @@ When user login in the future, they can view the product information that displa
 
 Since this website is deployed on the Heroku, Amazon Simple Storage Service for timely access to data.
 
-After user enter the product ID, the backend connects to AWS RDS and stores the statistics chart on AWS S3, and display on the website.
+After user enter the product ID, the backend connects to AWS RDS and stores the statistics chart on AWS S3.
+
+Then the statistics chart can be get and display on the website by AWS S3.
 
 **相關技術及工具:**
  * Python
