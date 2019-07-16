@@ -18,6 +18,24 @@
 
 使用者送出資料後，後端便連線至 AWS RDS 並將資訊統計成圖表儲存於 AWS S3 ，再由 AWS S3 擷取並顯示於網站中。
 
+**Introduction:**
+
+User can sign up the website or login with Facebook, Google account.
+
+If user login with Facebook, Google account, then show user picture at the home page.
+
+After user login, user can enter Shopee store ID to statisticize the products.
+
+Web crawler regularly gets products information of the Shopee store and store in the Amazon Relational Database Service.
+
+Including the product image, number of views, favorites, monthly sales, historical sales, customer ratings, etc.
+
+When user login in the future, they can view the product information that displayed on the website.
+
+Since this website is deployed on the Heroku, Amazon Simple Storage Service for timely access to data.
+
+After user enter the product ID, the backend connects to AWS RDS and stores the statistics chart on AWS S3, and display on the website.
+
 **相關技術及工具:**
  * Python
  * Django 
