@@ -32,7 +32,7 @@ Including the product image, number of views, favorites, monthly sales, historic
 
 When user login in the future, they can view the product information that displayed on the website.
 
-Since this website is deployed on the Heroku, Amazon Simple Storage Service for timely access to data.
+Since this website is deployed on the Heroku, Amazon Simple Storage Service is chosen for timely access to data.
 
 After user enter the product ID, the backend connects to AWS RDS and stores the statistics chart on AWS S3.
 
