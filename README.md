@@ -20,23 +20,7 @@
 
 **Introduction:**
 
-User can sign up the website or login with Facebook, Google account.
-
-If user login with Facebook, Google account, then show user picture at the home page.
-
-After user login, user can enter Shopee store ID to statisticize the products.
-
-Web crawler regularly gets products information of the Shopee store and store in the Amazon Relational Database Service.
-
-Including the product image, number of views, favorites, monthly sales, historical sales, customer ratings, etc.
-
-When user login in the future, they can view the product information that displayed on the website.
-
-Since this website is deployed on the Heroku, Amazon Simple Storage Service is chosen for timely access to data.
-
-After user enter the product ID, the backend connects to AWS RDS and stores the statistics chart on AWS S3.
-
-Then the statistics chart can be get and display on the website by AWS S3.
+User can sign up the website or login with Facebook, Google account, and it will show user picture at the home page if user login with Facebook, Google account. After user login, user can enter Shopee store ID to statisticize the products. In the backend,  web crawler regularly gets products information of the Shopee store and store in the Amazon Relational Database Service. Including the product image, number of views, favorites, monthly sales, historical sales, customer ratings, etc. When user use the website in the future, they can view the product information that displayed on the website. Since this website is deployed on the Heroku, Amazon Simple Storage Service is chosen for timely access to data. After user enter the product ID, the backend connects to AWS RDS and stores the statistics chart on AWS S3. Then the statistics chart can be get and display on the website by AWS S3.
 
 **相關技術及工具:**
  * Python
